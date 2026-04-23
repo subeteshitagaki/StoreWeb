@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subeteshitagaki - アプリストア</title>
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --text: #1f2937;
+            --muted: #64748b;
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --border: rgba(15, 23, 42, 0.08);
+            --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+            font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: min(1080px, calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 2rem 0 4rem;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .button {
+            background: var(--primary);
+            color: white;
+            padding: 0.9rem 1.6rem;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .button:hover {
+            background: var(--primary-dark);
+        }
+
+        .hero {
+            display: grid;
+            gap: 2rem;
+            align-items: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .hero-text {
+            max-width: 560px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.75rem, 4vw, 4.5rem);
+            margin: 0;
+            line-height: 1.02;
+        }
+
+        .hero-description {
+            margin: 1.3rem 0 2rem;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .stat {
+            background: #eef2ff;
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(79, 70, 229, 0.1);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-image {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            margin: 0 0 1rem;
+        }
+
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .cards {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .card h3 {
+            margin: 0 0 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .product-card img {
+            border-radius: 1.25rem;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .product-name {
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .product-price {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .badge {
+            display: inline-flex;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            background: #eef2ff;
+            color: #4338ca;
+            font-size: 0.9rem;
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .testimonial {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            display: grid;
+            gap: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .testimonial strong {
+            display: block;
+            margin-top: 0.75rem;
+            color: var(--text);
+        }
+
+        .newsletter {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            display: grid;
+            gap: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .newsletter input {
+            width: 100%;
+            padding: 1rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .newsletter form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        footer {
+            padding: 2rem 0 1rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 2.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container nav">
+            <a href="#" class="logo">subeteshitagaki</a>
+            <nav class="nav-links">
+                <a href="#products">アプリ</a>
+                <a href="#features">特徴</a>
+                <a href="#" class="button">今すぐダウンロード</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-text">
+                <p class="badge">新着アプリストア</p>
+                <h1 class="hero-title">あなたの生活を便利にする、選べるモバイルアプリ</h1>
+                <p class="hero-description">見やすく、使いやすいサンプルアプリストアページ。下書き用のレイアウトとコンテンツを使って、アプリ紹介・ダウンロード・口コミをわかりやすく伝えます。
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <strong>500+</strong>
+                        <span>人気アプリ</span>
+                    </div>
+                    <div class="stat">
+                        <strong>24/7</strong>
+                        <span>サポート</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80"
+                    alt="Store hero image">
+            </div>
+        </section>
+
+        <section id="features" class="grid" style="margin-top: 3rem;">
+            <div class="section-title">アプリストアの特徴</div>
+            <div class="cards">
+                <article class="card">
+                    <h3>豊富なアプリセレクション</h3>
+                    <p>日常生活を便利にするアプリを幅広くラインナップ。生産性、フィットネス、エンターテイメントまで揃っています。</p>
+                </article>
+                <article class="card">
+                    <h3>安心のサポート</h3>
+                    <p>ダウンロードから使用までの流れを丁寧にご案内。問題解決のご相談もスムーズに対応します。</p>
+                </article>
+                <article class="card">
+                    <h3>限定プロモーション</h3>
+                    <p>季節ごとの特別オファーや会員限定キャンペーンを随時更新。お得な情報を見逃さないでください。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="products" class="grid" style="margin-top: 3rem;">
+            <div class="section-title">おすすめアプリ</div>
+            <div class="cards">
+                <article class="card product-card">
+                    <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
+                        alt="タスク管理アプリ">
+                    <div class="product-info">
+                        <span class="badge">人気</span>
+                        <h3 class="product-name">タスク管理アプリ</h3>
+                        <p class="product-price">無料</p>
+                        <p>効率的にタスクを管理し、生産性を向上させるシンプルなアプリです。</p>
+                    </div>
+                </article>
+
+                <article class="card product-card">
+                    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80"
+                        alt="フィットネスアプリ">
+                    <div class="product-info">
+                        <span class="badge">新着</span>
+                        <h3 class="product-name">フィットネスアプリ</h3>
+                        <p class="product-price">無料</p>
+                        <p>ワークアウトを楽しく続けるためのガイドとトラッキング機能付き。</p>
+                    </div>
+                </article>
+
+                <article class="card product-card">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
+                        alt="音楽ストリーミングアプリ">
+                    <div class="product-info">
+                        <span class="badge">数量限定</span>
+                        <h3 class="product-name">音楽ストリーミングアプリ</h3>
+                        <p class="product-price">無料</p>
+                        <p>高品質な音楽をオフラインでも楽しめるストリーミングサービス。</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="container">
+        <div class="footer-grid">
+            <div>
+                <h3>subeteshitagaki</h3>
+                <p>シンプルで見やすい下書き用アプリストアサイトのサンプルです。</p>
+            </div>
+            <div>
+                <h4>リンク</h4>
+                <p><a href="#products">アプリ</a></p>
+                <p><a href="#features">特徴</a></p>
+            </div>
+        </div>
+        <p>? 2026 subeteshitagaki. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
